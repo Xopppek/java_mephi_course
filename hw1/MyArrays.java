@@ -10,9 +10,12 @@ public class MyArrays{
             throw new IllegalArgumentException("Array size must be more than zero");
         }
         
-        var arr = new double[n];
+        var arr = new int[n];
         fillArrayRandom(arr, -1, 1);
         System.out.println(Arrays.toString(arr));
+        System.out.println(getMaxValue(arr));
+        System.out.println(getMinValue(arr));
+        System.out.println(getAvgValue(arr));
 
         sc.close();
     }
@@ -42,5 +45,86 @@ public class MyArrays{
             // может принять значение maxValue
             arr[i] = (int) (Math.random() * (maxValue - minValue + 1)) + minValue;
         }
+    }
+
+    public static int getMaxValue(int[] arr){
+        checkArrayInput(arr);
+        int maxValue = arr[0];
+        for (int x : arr){
+            if (x > maxValue)
+                maxValue = x;
+        }
+
+        return maxValue;
+    }
+
+    public static int getMinValue(int[] arr){
+        checkArrayInput(arr);
+        int minValue = arr[0];
+        for (int x : arr){
+            if (x < minValue)
+                minValue = x;
+        }
+
+        return minValue;
+    }
+
+    public static double getAvgValue(int[] arr){
+        checkArrayInput(arr);
+        int n = arr.length;
+        double avg = 0;
+        for (double x : arr){
+            // вычисляю сумму сразу деля на n, чтобы избежать возможного переполнения
+            avg += x / n;
+        }
+
+        return avg;
+    }
+
+    public static double getMaxValue(double[] arr){
+        checkArrayInput(arr);
+        double maxValue = arr[0];
+        for (double x : arr){
+            if (x > maxValue)
+                maxValue = x;
+        }
+
+        return maxValue;
+    }
+
+    public static double getMinValue(double[] arr){
+        checkArrayInput(arr);
+        double minValue = arr[0];
+        for (double x : arr){
+            if (x < minValue)
+                minValue = x;
+        }
+
+        return minValue;
+    }
+
+    public static double getAvgValue(double[] arr){
+        checkArrayInput(arr);
+        int n = arr.length;
+        double avg = 0;
+        for (double x : arr){
+            avg += x / n;
+        }
+
+        return avg;
+    }
+
+    private static void checkArrayInput(int[] arr){
+        if (arr == null)
+            throw new NullPointerException();
+        if (arr.length == 0)
+            throw new IllegalArgumentException("Array length must be more than zero");
+    }
+
+    private static void checkArrayInput(double[] arr){
+        if (arr == null)
+            throw new NullPointerException();
+        if (arr.length == 0)
+            throw new IllegalArgumentException("Array length must be more than zero");
     }
 }
