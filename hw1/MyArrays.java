@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.function.BiFunction;
 
 public class MyArrays{
     public static void main(String[] args) {
@@ -10,12 +11,14 @@ public class MyArrays{
             throw new IllegalArgumentException("Array size must be more than zero");
         }
         
-        var arr = new int[n];
-        fillArrayRandom(arr, -1, 1);
+        var arr = new double[n];
+        fillArrayRandom(arr, -1, 5);
         System.out.println(Arrays.toString(arr));
         System.out.println(getMaxValue(arr));
         System.out.println(getMinValue(arr));
         System.out.println(getAvgValue(arr));
+        insertionSort(arr, (x, y) -> x > y);
+        System.out.println(Arrays.toString(arr));
 
         sc.close();
     }
@@ -126,5 +129,36 @@ public class MyArrays{
             throw new NullPointerException();
         if (arr.length == 0)
             throw new IllegalArgumentException("Array length must be more than zero");
+    }
+
+    // стандратные функции, сортирующие по возрастанию
+    public static void insertionSort(int[] arr){
+        insertionSort(arr, (x, y) -> x < y);
+    }
+
+    public static void insertionSort(double[] arr){
+        insertionSort(arr, (x, y) -> x < y);
+    }
+
+    public static void insertionSort(int[] arr, BiFunction<Integer, Integer, Boolean> compare){
+        int j;
+        for (int i = 1; i < arr.length; i++) {
+            int curElem = arr[i];
+            for (j = i; j > 0 && compare.apply(curElem, arr[j - 1]); j--) {
+                arr[j] = arr[j - 1];
+            }
+            arr[j] = curElem;
+        }
+    }
+
+    public static void insertionSort(double[] arr, BiFunction<Double, Double, Boolean> compare){
+        int j;
+        for (int i = 1; i < arr.length; i++) {
+            double curElem = arr[i];
+            for (j = i; j > 0 && compare.apply(curElem, arr[j - 1]); j--) {
+                arr[j] = arr[j - 1];
+            }
+            arr[j] = curElem;
+        }
     }
 }
